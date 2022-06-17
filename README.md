@@ -8,7 +8,7 @@
     <img src="https://user-images.githubusercontent.com/73957024/174139959-6734e834-8ace-4c98-a051-048358f1361b.png" alt="Logo" width="500" height="100">
   </a>
 
-<h3 align="center">Zensar Macy's Website</h3>
+<h3 align="center">Macy's Website</h3>
 
 </div>
 
