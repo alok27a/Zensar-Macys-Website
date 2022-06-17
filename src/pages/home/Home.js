@@ -4,8 +4,8 @@ import Navbar from '../../components/navbar/Navbar'
 function Home() {
   return (
     <>
-     {/* Loading Navbar component */}
-     <Navbar/>
+      {/* Loading Navbar component */}
+      <Navbar />
     </>
   )
 }
