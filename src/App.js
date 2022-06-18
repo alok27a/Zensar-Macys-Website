@@ -1,12 +1,15 @@
 import './App.css';
+import UserState from './context/users/UserState';
 import Home from './pages/home/Home';
 
 
 function App() {
   return (
     <>
-    {/* Rendering home page component */}
-      <Home />
+      <UserState>
+        {/* Rendering home page component */}
+        <Home />
+      </UserState>
     </>
   );
 }

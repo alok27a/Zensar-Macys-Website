@@ -6,12 +6,28 @@ import 'aos/dist/aos.css';
 
 
 function Input() {
-  const [value1, onChange1] = useState(new Date());
-  const [value2, onChange2] = useState(new Date());
+  const [categ, setCateg] = useState("low");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
+  const [user, setUser] = useState({ category: "low", startDate: "", endDate: "" })
+
+  useEffect(() => {
+    setUser({ category: categ, startDate: startDate, endDate: endDate })
+  }, [categ, startDate, endDate])
+
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    // HERE CALL TO THE CONTEXT API FOR BACKEND
+
+    setUser({ category: "", startDate: "", endDate: "" })
+  }
 
   useEffect(() => {
     AOS.init();
   }, []);
+
   return (
     <>
       <div className="input-container my-20 mx-5 sm:flex sm:flex-row sm:justify-evenly ">
@@ -24,26 +40,26 @@ function Input() {
               <div className="flex flex-col my-5">
                 <div className="text-l mb-2">Enter Your Category</div>
                 <div className="xl:w-96 ">
-                  <select className="form-select appearance-none block w-10/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example ">
-                    <option selected value="1">Low</option>
-                    <option value="2">Medium</option>
-                    <option value="3">High</option>
+                  <select className="form-select appearance-none block w-10/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example" onChange={(categ) => { setCateg(categ.target.value) }} id="category" name="category" value={categ}>
+                    <option selected value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
                   </select>
                 </div>
               </div>
 
               <div className="start-date my-5 flex flex-col">
                 <div className="text-l mb-2">Enter Start Date</div>
-                <DatePicker onChange={onChange1} value={value1} />
+                <DatePicker onChange={(date) => { setStartDate(date) }} id="startDate" name="startDate" value={startDate} />
               </div>
 
               <div className="start-date my-5 flex flex-col">
                 <div className="text-l mb-2">Enter End Date</div>
-                <DatePicker onChange={onChange2} value={value2} />
+                <DatePicker onChange={(date) => { setEndDate(date) }} id="endDate" name="endDate" value={endDate} />
               </div>
 
               <div className="submit-button flex justify-center">
-                <button className="bg-[#18B1C3] hover:bg-[#0B949C] active:bg-[#082948] focus:outline-none focus:ring focus:ring-violet-300 p-4 text-l font-bold rounded-xl " >
+                <button type="submit" className="bg-[#18B1C3] hover:bg-[#0B949C] active:bg-[#082948] focus:outline-none focus:ring focus:ring-violet-300 p-4 text-l font-bold rounded-xl"  >
                   Display Results
                 </button>
               </div>
@@ -52,7 +68,7 @@ function Input() {
             </div>
           </div>
         </form>
-        <img src={homeimg} className="hidden sm:block sm: w-1/2" data-aos="fade-left"/>
+        <img src={homeimg} className="hidden sm:block sm: w-1/2" data-aos="fade-left" />
       </div>
     </>
   )
