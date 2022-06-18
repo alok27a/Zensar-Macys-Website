@@ -1,5 +1,5 @@
 import React from 'react'
-import DropdownElement from '../../components/dropdown/DropdownElement'
+import Input from '../../components/input/Input'
 import Navbar from '../../components/navbar/Navbar'
 
 function Home() {
@@ -7,7 +7,7 @@ function Home() {
     <>
       {/* Loading Navbar component */}
       <Navbar />
-      <DropdownElement/>
+      <Input/>
     </>
   )
 }
