@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import DatePicker from 'react-date-picker';
 import homeimg from '../../images/homeimg2.jpg'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import userContext from '../../context/users/userContext';
 
 
 function Input() {
+  const context = useContext(userContext)
+  const { setUserContext } = context;
+
+
   const [categ, setCateg] = useState("low");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -14,7 +19,8 @@ function Input() {
 
   useEffect(() => {
     setUser({ category: categ, startDate: startDate, endDate: endDate })
-  }, [categ, startDate, endDate])
+    setUserContext({ category: categ, startDate: startDate, endDate: endDate });
+  }, [categ, startDate, endDate, setUserContext])
 
 
   const handleClick = (e) => {

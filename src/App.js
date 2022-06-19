@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <UserState>
-        {/* Rendering home page component */}
+        {/* Rendering home page components */}
         <Home />
       </UserState>
     </>

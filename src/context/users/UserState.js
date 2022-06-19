@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import UserContext from "./userContext";
 
-const UserState = (props) =>{
+const UserState = (props) => {
 
-    const state ={
-        
-    }
+
+    const [usercontext, setUserContext] = useState({ category: "low", startDate: "", endDate: "" });
 
     // useState to update the state
     return (
-        <UserContext.Provider value={state}>
+        <UserContext.Provider value={{usercontext, setUserContext}}>
             {props.children}
         </UserContext.Provider>
     )

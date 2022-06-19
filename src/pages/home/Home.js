@@ -7,6 +7,7 @@ function Home() {
     <>
       {/* Loading Navbar component */}
       <Navbar />
+      {/* Loading Input Component */}
       <Input/>
     </>
   )
