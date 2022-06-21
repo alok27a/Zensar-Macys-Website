@@ -37,7 +37,7 @@ In order to get a copy of the project you will require you to have Node.js (v14+
 ### Installation
 Open the terminal in the folder in which you wish to clone the repository and enter the following command:
 ``` 
-git clone https://github.com/alok27a/Zensar-Macys-Website
+git clone https://github.com/alok27a/Zensar-Macys-Website.git
 cd Zensar-Macys-Website
 ```
 Install all the NPM packages:
