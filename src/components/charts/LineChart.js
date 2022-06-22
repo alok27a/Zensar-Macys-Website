@@ -57,6 +57,7 @@ const LineChart = () => {
         return [date.getFullYear(), mnth, day].join("-");
     }
 
+    let op;
 
     var baseUrl = "http://127.0.0.1:8000/arima/"
 
@@ -72,22 +73,21 @@ const LineChart = () => {
                 body: JSON.stringify({ date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString() })
             }).then((response) => {
                 response.json().then((json) => {
-                    console.log(json)
-                    setChart(json.data)
+                    setChart(JSON.parse(json)["Priority_Forecast"])
                 })
             }).catch(error => {
                 console.log(error)
             })
         }
         fetchData()
-    }, [baseUrl, usercontext.startDate])
+    }, [baseUrl, chart, usercontext.startDate])
 
 
     var data = {
         labels: getDatesInRange(new Date(formatDateForChart(`${usercontext.startDate.toString()}`)), new Date(formatDateForChart(`${usercontext.endDate.toString()}`))),
         datasets: [{
             label: `Priority Forecast`,
-            data: [65, 59, 80, 81, 56, 55, 40],
+            data: Object.values(chart),
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
