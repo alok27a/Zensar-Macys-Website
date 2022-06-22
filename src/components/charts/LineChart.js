@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import userContext from '../../context/users/userContext'
-import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement,Title,Legend } from 'chart.js';
+import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Title, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2'
 
 
@@ -20,37 +20,73 @@ const LineChart = () => {
 
     const [chart, setChart] = useState([])
 
-    // var baseUrl = "https://api.coinranking.com/v2/coin/Qwsogvtv82FCd?timePeriod=30d"
-    // var proxyUrl = "https://cors-anywhere.herokuapp.com/"
-    // var apiKey = ""
 
-    // useEffect(() => {
-    //     const fetchCoins = async () => {
-    //         await fetch(`${proxyUrl}${baseUrl}`, {
-    //             method: 'GET',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'x-access-token': `${apiKey}`,
-    //                 'Accept': 'application/json',
-    //                 'Access-Control-Allow-Origin': '*'
-    //             }
-    //         }).then((response) => {
-    //             response.text().then((json) => {
-    //                 console.log(json.data)
-    //                 setChart(json.data)
-    //             })
-    //         }).catch(error => {
-    //             console.log(error)
-    //         })
-    //     }
-    //     fetchCoins()
-    // }, [baseUrl, proxyUrl, apiKey])
+    function countNumberOfPeriods() {
+        //calculate time difference  
+        var time_difference = usercontext.endDate.getTime() - usercontext.startDate.getTime();
+        //calculate days difference by dividing total milliseconds in a day  
+        var days_difference = time_difference / (1000 * 60 * 60 * 24);
+        var count = days_difference % 5 + 1
+        return count;
+    }
 
-    const NUMBER_CFG = { count: 7, min: -100, max: 100 };
+    function getDatesInRange(startDate, endDate) {
+        const date = new Date(startDate.getTime());
+
+        const dates = [];
+
+        while (date <= endDate) {
+            dates.push(formatDateForChart(new Date(date)));
+            date.setDate(date.getDate() + 5);
+        }
+
+        return dates;
+    }
+
+    function formatDateForAPI(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + date.getDate()).slice(-2);
+        return [day, mnth, date.getFullYear()].join("");
+    }
+
+    function formatDateForChart(str) {
+        var date = new Date(str),
+            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+            day = ("0" + date.getDate()).slice(-2);
+        return [date.getFullYear(), mnth, day].join("-");
+    }
+
+
+    var baseUrl = "http://127.0.0.1:8000/arima/"
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await fetch(`${baseUrl}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify({ date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString() })
+            }).then((response) => {
+                response.json().then((json) => {
+                    console.log(json)
+                    setChart(json.data)
+                })
+            }).catch(error => {
+                console.log(error)
+            })
+        }
+        fetchData()
+    }, [baseUrl, usercontext.startDate])
+
+
     var data = {
-        labels: [`${usercontext.startDate.toString().slice(4, 10)}`, `${usercontext.endDate.toString().slice(4, 10)}`],
+        labels: getDatesInRange(new Date(formatDateForChart(`${usercontext.startDate.toString()}`)), new Date(formatDateForChart(`${usercontext.endDate.toString()}`))),
         datasets: [{
-            label: `Details`,
+            label: `Priority Forecast`,
             data: [65, 59, 80, 81, 56, 55, 40],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -69,9 +105,9 @@ const LineChart = () => {
                 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1,
-            pointStyle:'star',
-            pointBorderColor:'blue',
-            pointBackgroundColor:"#ffff"
+            pointStyle: 'star',
+            pointBorderColor: 'blue',
+            pointBackgroundColor: "#ffff"
         }]
     }
 

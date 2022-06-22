@@ -4,18 +4,18 @@ import homeimg from '../../images/homeimg2.jpg'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import userContext from '../../context/users/userContext';
-
+import { Link } from "react-router-dom";
 
 function Input() {
   const context = useContext(userContext)
   const { setUserContext } = context;
 
 
-  const [categ, setCateg] = useState("low");
+  const [categ, setCateg] = useState("Category1");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  const [user, setUser] = useState({ category: "low", startDate: "", endDate: "" })
+  const [user, setUser] = useState({ category: "Category1", startDate: "", endDate: "" })
 
   useEffect(() => {
     setUser({ category: categ, startDate: startDate, endDate: endDate })
@@ -47,9 +47,9 @@ function Input() {
                 <div className="text-l mb-2">Enter Your Category</div>
                 <div className="xl:w-96 ">
                   <select className="form-select appearance-none block w-10/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example" onChange={(categ) => { setCateg(categ.target.value) }} id="category" name="category" value={categ}>
-                    <option selected value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                    <option selected value="Category1">Category 1</option>
+                    <option value="Category2">Category 2</option>
+                    <option value="Category3">Category 3</option>
                   </select>
                 </div>
               </div>
@@ -65,9 +65,11 @@ function Input() {
               </div>
 
               <div className="submit-button flex justify-center">
-                <button type="submit" className="bg-[#18B1C3] hover:bg-[#0B949C] active:bg-[#082948] focus:outline-none focus:ring focus:ring-violet-300 p-4 text-l font-bold rounded-xl"  >
-                  Display Results
-                </button>
+                <Link to="/output">
+                  <button type="submit" className="bg-[#18B1C3] hover:bg-[#0B949C] active:bg-[#082948] focus:outline-none focus:ring focus:ring-violet-300 p-4 text-l font-bold rounded-xl"  >
+                    Display Results
+                  </button>
+                </Link>
               </div>
 
 
