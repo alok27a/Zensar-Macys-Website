@@ -42,7 +42,7 @@ cd Zensar-Macys-Website
 ```
 Install all the NPM packages:
 ```
-npm i 
+npm i -f
 ```
 In order to run the frontend:
 ```
