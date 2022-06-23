@@ -57,8 +57,6 @@ const LineChart = () => {
         return [date.getFullYear(), mnth, day].join("-");
     }
 
-    let op;
-
     var baseUrl = "http://127.0.0.1:8000/arima/"
 
     useEffect(() => {
