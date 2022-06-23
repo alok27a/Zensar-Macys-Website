@@ -68,7 +68,7 @@ const LineChart = () => {
                     'Accept': 'application/json',
                     'Access-Control-Allow-Origin': '*'
                 },
-                body: JSON.stringify({ date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString() })
+                body: JSON.stringify({ s_date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString(), e_date: formatDateForAPI(`${usercontext.endDate.toString()}`).toString() })
             }).then((response) => {
                 response.json().then((json) => {
                     setChart(JSON.parse(json)["Priority_Forecast"])
