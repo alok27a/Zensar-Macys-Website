@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import userContext from '../../context/users/userContext'
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Title, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2'
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 
 ChartJS.register(
@@ -12,6 +13,7 @@ ChartJS.register(
     LineElement,
     PointElement
 )
+ChartJS.register(zoomPlugin)
 
 
 const LineChart = () => {
@@ -78,7 +80,7 @@ const LineChart = () => {
             })
         }
         fetchData()
-    }, [baseUrl, chart, usercontext.startDate])
+    }, [baseUrl, chart, usercontext.endDate, usercontext.startDate])
 
 
     var data = {
@@ -111,7 +113,7 @@ const LineChart = () => {
 
 
     var options = {
-        maintainAspectRatio: false,
+        responsive: true,
         scales: {
             y: {
                 beginAtZero: true
@@ -129,8 +131,9 @@ const LineChart = () => {
         <>
             <Line
                 data={data}
-                height={400}
                 options={options}
+                width={900}
+                height={450}
             />
 
         </>

@@ -8,6 +8,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import LineChart from './components/charts/LineChart';
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
               <Home />
             </Route>
             <Route exact path="/output">
-              <Output />
+              < LineChart />
             </Route>
           </Switch>
         </UserState>

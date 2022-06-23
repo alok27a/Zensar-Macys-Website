@@ -66,17 +66,16 @@ function Input() {
 
               <div className="submit-button flex justify-center">
                 <Link to="/output">
-                  <button type="submit" className="bg-[#18B1C3] hover:bg-[#0B949C] active:bg-[#082948] focus:outline-none focus:ring focus:ring-violet-300 p-4 text-l font-bold rounded-xl"  >
+                  {/* <button type="submit" className="bg-[#18B1C3] hover:bg-[#0B949C] active:bg-[#082948] focus:outline-none focus:ring focus:ring-violet-300 p-4 text-l font-bold rounded-xl"  >
                     Display Results
-                  </button>
+                  </button> */}
                 </Link>
               </div>
-
 
             </div>
           </div>
         </form>
-        <img src={homeimg} className="hidden sm:block sm: w-1/2" data-aos="fade-left" />
+        {/* <img src={homeimg} className="hidden sm:block sm: w-1/2" data-aos="fade-left" /> */}
       </div>
     </>
   )
