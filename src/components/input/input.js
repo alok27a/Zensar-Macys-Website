@@ -56,12 +56,12 @@ function Input() {
 
               <div className="start-date my-5 flex flex-col">
                 <div className="text-l mb-2">Enter Start Date</div>
-                <DatePicker onChange={(date) => { setStartDate(date) }} id="startDate" name="startDate" value={startDate} />
+                <DatePicker onChange={(date) => { setStartDate(date) }} id="startDate" name="startDate" value={startDate} clearIcon={null} />
               </div>
 
               <div className="start-date my-5 flex flex-col">
                 <div className="text-l mb-2">Enter End Date</div>
-                <DatePicker onChange={(date) => { setEndDate(date) }} id="endDate" name="endDate" value={endDate} />
+                <DatePicker onChange={(date) => { setEndDate(date) }} id="endDate" name="endDate" value={endDate} clearIcon={null} />
               </div>
 
               <div className="submit-button flex justify-center">
