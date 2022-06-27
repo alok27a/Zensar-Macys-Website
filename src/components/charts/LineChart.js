@@ -133,7 +133,7 @@ const LineChart = () => {
                 data={data}
                 options={options}
                 width={900}
-                height={450}
+                height={250}
             />
 
         </>

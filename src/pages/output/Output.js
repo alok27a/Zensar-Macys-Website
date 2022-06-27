@@ -19,6 +19,12 @@ function Output() {
           Display In New Page
         </button>
       </Link>
+      <LineChart />
+      <Link to="/output">
+        <button type="submit" className="bg-[#F4F4F5] hover: active:bg-[#e8f0f8] focus:outline-none focus:ring focus:ring-violet-300 p-3 text-l font-bold rounded-xl w-fit text-[#6984D2]"  >
+          Display In New Page
+        </button>
+      </Link>
     </div>
   )
 }

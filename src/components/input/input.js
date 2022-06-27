@@ -63,15 +63,6 @@ function Input() {
                 <div className="text-l mb-2">Enter End Date</div>
                 <DatePicker onChange={(date) => { setEndDate(date) }} id="endDate" name="endDate" value={endDate} clearIcon={null} />
               </div>
-
-              <div className="submit-button flex justify-center">
-                <Link to="/output">
-                  {/* <button type="submit" className="bg-[#18B1C3] hover:bg-[#0B949C] active:bg-[#082948] focus:outline-none focus:ring focus:ring-violet-300 p-4 text-l font-bold rounded-xl"  >
-                    Display Results
-                  </button> */}
-                </Link>
-              </div>
-
             </div>
           </div>
         </form>
