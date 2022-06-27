@@ -70,7 +70,7 @@ const LineChart = () => {
                     'Accept': 'application/json',
                     'Access-Control-Allow-Origin': '*'
                 },
-                body: JSON.stringify({ s_date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString(), e_date: formatDateForAPI(`${usercontext.endDate.toString()}`).toString() })
+                body: JSON.stringify({ categ: `${usercontext.category.toString()}`,s_date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString(), e_date: formatDateForAPI(`${usercontext.endDate.toString()}`).toString() })
             }).then((response) => {
                 response.json().then((json) => {
                     setChart(JSON.parse(json)["Priority_Forecast"])
@@ -80,7 +80,7 @@ const LineChart = () => {
             })
         }
         fetchData()
-    }, [baseUrl, chart, usercontext.endDate, usercontext.startDate])
+    }, [baseUrl, chart, usercontext.category, usercontext.endDate, usercontext.startDate])
 
 
     var data = {
@@ -133,7 +133,7 @@ const LineChart = () => {
                 data={data}
                 options={options}
                 width={900}
-                height={250}
+                height={255}
             />
 
         </>

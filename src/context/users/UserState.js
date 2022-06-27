@@ -4,7 +4,7 @@ import UserContext from "./userContext";
 const UserState = (props) => {
 
 
-    const [usercontext, setUserContext] = useState({ category: "low", startDate: "", endDate: "" });
+    const [usercontext, setUserContext] = useState({ category: "1", startDate: "", endDate: "" });
 
     // useState to update the state
     return (
