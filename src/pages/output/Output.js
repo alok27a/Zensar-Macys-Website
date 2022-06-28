@@ -4,6 +4,7 @@ import LineChart from '../../components/charts/LineChart'
 import '../output/output.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import HistoryLineChart from '../../components/charts/HistoryLineChart';
 
 function Output() {
 
@@ -13,14 +14,14 @@ function Output() {
 
   return (
     <div className='container flex flex-col p-4' data-aos="fade-left">
-      <LineChart />
-      <Link to="/output">
+      <LineChart height={255}/>
+      <Link to="/output1">
         <button type="submit" className="bg-[#F4F4F5] hover: active:bg-[#e8f0f8] focus:outline-none focus:ring focus:ring-violet-300 p-3 text-l font-bold rounded-xl w-fit text-[#6984D2]"  >
           Display In New Page
         </button>
       </Link>
-      <LineChart />
-      <Link to="/output">
+      <HistoryLineChart height={255}/>
+      <Link to="/output2">
         <button type="submit" className="bg-[#F4F4F5] hover: active:bg-[#e8f0f8] focus:outline-none focus:ring focus:ring-violet-300 p-3 text-l font-bold rounded-xl w-fit text-[#6984D2]"  >
           Display In New Page
         </button>

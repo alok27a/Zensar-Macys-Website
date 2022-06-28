@@ -10,7 +10,7 @@ function Home() {
       <div className="container">
         {/* Loading Navbar component */}
         <Navbar />
-        <div className="flex flex-col ml-16 p-4 justify-evenly sm:flex-row ">
+        <div className="flex flex-col ml-16 p-2 justify-evenly sm:flex-row ">
           {/* Loading Input Component */}
           <Input  />
           <Output />

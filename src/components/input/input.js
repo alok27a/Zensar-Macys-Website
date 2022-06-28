@@ -36,7 +36,7 @@ function Input() {
 
   return (
     <>
-      <div className="input-container my-20 mx-5 sm:flex sm:flex-row sm:justify-evenly ">
+      <div className="input-container h-fit my-20 mx-5 sm:flex sm:flex-row sm:justify-evenly ">
         <form >
           <div className="max-w-sm max-h-max rounded shadow-lg " data-aos="fade-right">
             <div className="px-6 py-4">
@@ -47,7 +47,8 @@ function Input() {
                 <div className="text-l mb-2">Enter Your Category</div>
                 <div className="xl:w-96 ">
                   <select className="form-select appearance-none block w-10/12 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example" onChange={(categ) => { setCateg(categ.target.value) }} id="category" name="category" value={categ}>
-                    <option selected value="1">Category 1</option>
+                    <option selected={true}>Click Here</option>
+                    <option value="1">Category 1</option>
                     <option value="2">Category 2</option>
                     <option value="3">Category 3</option>
                   </select>

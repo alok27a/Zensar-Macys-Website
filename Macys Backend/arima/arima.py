@@ -5,6 +5,7 @@ from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.vector_ar.var_model import VAR
 from sklearn.metrics import mean_squared_error
 import datetime
+# from fbprophet import Prophet
 from datetime import date
 import pickle
 

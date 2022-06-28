@@ -16,50 +16,48 @@ ChartJS.register(
 ChartJS.register(zoomPlugin)
 
 
-const LineChart = (props) => {
+const HistoryLineChart = (props) => {
     const context = useContext(userContext)
     const { usercontext } = context
 
     const [chart, setChart] = useState([])
 
 
-    function countNumberOfPeriods() {
-        //calculate time difference  
-        var time_difference = usercontext.endDate.getTime() - usercontext.startDate.getTime();
-        //calculate days difference by dividing total milliseconds in a day  
-        var days_difference = time_difference / (1000 * 60 * 60 * 24);
-        var count = days_difference % 5 + 1
-        return count;
-    }
-
     function getDatesInRange(startDate, endDate) {
+        // console.log(startDate)
         const date = new Date(startDate.getTime());
-
+        // console.log(date)
+        let i = 0
+        let l;
+        if (chart.history === undefined)
+            l = 0;
+        else
+            l = chart.history.length
         const dates = [];
-
-        while (date <= endDate) {
+        // console.log("The length of l is" , l)
+        while (i < l) { 
             dates.push(formatDateForChart(new Date(date)));
             date.setDate(date.getDate() + 5);
+            i++
         }
 
         return dates;
     }
 
     function formatDateForAPI(str) {
-        var date = new Date(str),
-            mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-            day = ("0" + date.getDate()).slice(-2);
-        return [day, mnth, date.getFullYear()].join("");
+        let d = new Date(str.slice(0, 4), str.slice(5, 7), parseInt(str.slice(8, 10)) - 365, 0, 0, 0, 0)
+        return d;
     }
-
+    
     function formatDateForChart(str) {
         var date = new Date(str),
             mnth = ("0" + (date.getMonth() + 1)).slice(-2),
             day = ("0" + date.getDate()).slice(-2);
-        return [date.getFullYear(), mnth, day].join("-");
+        // console.log(date.getFullYear()-1)
+        return [date.getFullYear()-1, mnth, day].join("-");
     }
 
-    var baseUrl = "http://127.0.0.1:8000/arima/"
+    var baseUrl = "http://localhost:5000/api/previousdata/fetchdata"
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,10 +68,26 @@ const LineChart = (props) => {
                     'Accept': 'application/json',
                     'Access-Control-Allow-Origin': '*'
                 },
-                body: JSON.stringify({ categ: `${usercontext.category.toString()}`,s_date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString(), e_date: formatDateForAPI(`${usercontext.endDate.toString()}`).toString() })
+                body: JSON.stringify({
+                    categ: `${usercontext.category.toString()}`,
+                    s_date: formatDateForAPI(`${usercontext.startDate.toISOString()}`).toString(),
+                    e_date: formatDateForAPI(`${usercontext.endDate.toISOString()}`).toString()
+                })
             }).then((response) => {
                 response.json().then((json) => {
-                    setChart(JSON.parse(json)["Priority_Forecast"])
+                    // console.log(json)
+                    // console.log(formatDateForAPI(`${usercontext.startDate.toISOString()}`).toString())
+                    let values = ["5.5"]
+                    for (let index = 0; index < json.length; index++) {
+                        // console.log(json[index].Category)
+                        if (json[index].Category === `${usercontext.category.toString()}`) {
+                            // console.log(json[index].Priority)
+                            values.push(json[index].Priority)
+                        }
+                    }
+                    let data = { history: values }
+                    // console.log(data)
+                    setChart(data)
                 })
             }).catch(error => {
                 console.log(error)
@@ -86,27 +100,18 @@ const LineChart = (props) => {
     var data = {
         labels: getDatesInRange(new Date(formatDateForChart(`${usercontext.startDate.toString()}`)), new Date(formatDateForChart(`${usercontext.endDate.toString()}`))),
         datasets: [{
-            label: `Priority Forecast`,
-            data: Object.values(chart),
+            label: `Previous Year Values`,
+            data: chart.history,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
+    
                 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1,
-            pointStyle: 'star',
-            pointBorderColor: 'blue',
+            pointStyle: 'circle',
+            pointBorderColor: 'black',
             pointBackgroundColor: "#ffff"
         }]
     }
@@ -140,4 +145,4 @@ const LineChart = (props) => {
     )
 }
 
-export default LineChart
+export default HistoryLineChart
