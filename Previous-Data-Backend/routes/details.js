@@ -7,9 +7,8 @@ const Details = require('../models/ArimaDetails')
 router.post('/fetchdata', async (req, res) => {
     try {
         const { categ, s_date, e_date } = req.body;
-        console.log(s_date)
-        console.log(e_date)
-        const details = await Details.find({ date: { $lte: e_date, $gte: s_date }, Category: categ }, function (err, det) {
+        
+        const details = await Details.find({ date: { $gt: s_date, $lt: e_date }, Category: categ }, function (err, det) {
             if (err) res.json("Error")
             res.status(200).json(det)
         }).clone()
@@ -17,7 +16,7 @@ router.post('/fetchdata', async (req, res) => {
         console.log(error.message)
         res.status(500).json({ message: error.message })
     }
-    
+
 })
 
 
