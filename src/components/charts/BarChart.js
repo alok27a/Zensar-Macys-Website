@@ -1,33 +1,51 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {
     Chart as ChartJS,
-
     BarElement,
-
+    LinearScale,
+    CategoryScale,
+    Legend,
+    Title
 } from 'chart.js';
-
 import { Bar } from 'react-chartjs-2';
+import graphContext from '../../context/graphs/graphContext';
 
 ChartJS.register(
-    BarElement,
-);
+    Title,
+    Legend,
+    CategoryScale,
+    LinearScale,
+    BarElement
+)
 
 
 const BarChart = (props) => {
-    const [chart, setChart] = useState({})
+
+    const context2 = useContext(graphContext)
+    const { graphcontext1, graphcontext2 } = context2
 
 
-    var data = {
-        labels: [],
+    const data = {
+        labels: [`Comparison`],
         datasets: [{
-            label: [],
-            data: [],
+            label: 'Priority Forecast',
+            data: [parseFloat(graphcontext1.forcastSum)],
             backgroundColor: [
-                'rgba(153, 102, 255, 0.2)'
+                'rgba(255, 99, 132, 0.2)'
             ],
             borderColor: [
-
-                'rgba(153, 102, 255, 1)'
+                'rgb(255, 99, 132)',
+            ],
+            borderWidth: 1
+        },
+        {
+            label: 'Previous Year',
+            data: [parseFloat(graphcontext2.previousSum)],
+            backgroundColor: [
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1
         }]

@@ -3,6 +3,7 @@ import userContext from '../../context/users/userContext'
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Title, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2'
 import zoomPlugin from 'chartjs-plugin-zoom';
+import graphContext from '../../context/graphs/graphContext';
 
 
 ChartJS.register(
@@ -19,6 +20,9 @@ ChartJS.register(zoomPlugin)
 const HistoryLineChart = (props) => {
     const context = useContext(userContext)
     const { usercontext } = context
+
+    const context2 = useContext(graphContext)
+    const { graphcontext2, setGraphContext2 } = context2
 
     const [chart, setChart] = useState([])
     const [dates, setDates] = useState([])
@@ -57,12 +61,14 @@ const HistoryLineChart = (props) => {
                     // console.log(formatDateForAPI(`${usercontext.endDate.toISOString()}`).toString())
                     let values = []
                     let json_dates = []
+                    let sum = 0;
 
                     for (let index = 0; index < json.length; index++) {
                         // console.log(json[index].Category)
                         if (json[index].Category === `${usercontext.category.toString()}`) {
-                            console.log(json[index])
+                            // console.log(json[index])
                             values.push(json[index].Priority)
+                            sum += parseFloat(json[index].Priority)
                             json_dates.push(formatDatesChart(json[index].date))
                         }
                     }
@@ -71,13 +77,14 @@ const HistoryLineChart = (props) => {
                     // console.log(data)
                     setChart(data)
                     setDates(data_dates)
+                    setGraphContext2({ previousSum: sum.toString() })
                 })
             }).catch(error => {
                 console.log(error)
             })
         }
         fetchData()
-    }, [baseUrl, chart,dates ,usercontext.category, usercontext.endDate, usercontext.startDate])
+    }, [baseUrl, chart, dates, setGraphContext2, usercontext.category, usercontext.endDate, usercontext.startDate])
 
 
     var data = {
@@ -89,7 +96,6 @@ const HistoryLineChart = (props) => {
                 'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
-
                 'rgba(255, 159, 64, 1)'
             ],
             borderWidth: 1,

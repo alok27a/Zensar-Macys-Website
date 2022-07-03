@@ -3,6 +3,7 @@ import userContext from '../../context/users/userContext'
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Title, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2'
 import zoomPlugin from 'chartjs-plugin-zoom';
+import graphContext from '../../context/graphs/graphContext';
 
 
 ChartJS.register(
@@ -19,6 +20,9 @@ ChartJS.register(zoomPlugin)
 const LineChart = (props) => {
     const context = useContext(userContext)
     const { usercontext } = context
+
+    const context2 = useContext(graphContext)
+    const { graphcontext1, setGraphContext1 } = context2
 
     const [chart, setChart] = useState([])
 
@@ -59,6 +63,12 @@ const LineChart = (props) => {
         return [date.getFullYear(), mnth, day].join("-");
     }
 
+    function getDataPoints(arr) {
+        if (arr.length === 1)
+            return [];
+        return arr;
+    }
+
     var baseUrl = "http://127.0.0.1:8000/arima/"
 
     useEffect(() => {
@@ -70,25 +80,32 @@ const LineChart = (props) => {
                     'Accept': 'application/json',
                     'Access-Control-Allow-Origin': '*'
                 },
-                body: JSON.stringify({ categ: `${usercontext.category.toString()}`,s_date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString(), e_date: formatDateForAPI(`${usercontext.endDate.toString()}`).toString() })
+                body: JSON.stringify({ categ: `${usercontext.category.toString()}`, s_date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString(), e_date: formatDateForAPI(`${usercontext.endDate.toString()}`).toString() })
             }).then((response) => {
                 response.json().then((json) => {
-                    console.log(JSON.parse(json)["Priority_Forecast"])
                     setChart(JSON.parse(json)["Priority_Forecast"])
+                    let sum = 0;
+
+                    for (let index = 0; index < Object.values(chart).length; index++) {
+                        sum += parseFloat(Object.values(chart)[index])
+                    }
+
+                    if (Object.values(chart).length !== 1)
+                        setGraphContext1({ forcastSum: sum.toString() })
                 })
             }).catch(error => {
                 console.log(error)
             })
         }
         fetchData()
-    }, [baseUrl, chart, usercontext.category, usercontext.endDate, usercontext.startDate])
+    }, [baseUrl, chart, setGraphContext1, usercontext.category, usercontext.endDate, usercontext.startDate])
 
 
     var data = {
         labels: getDatesInRange(new Date(formatDateForChart(`${usercontext.startDate.toString()}`)), new Date(formatDateForChart(`${usercontext.endDate.toString()}`))),
         datasets: [{
             label: `Priority Forecast`,
-            data: Object.values(chart),
+            data: getDataPoints(Object.values(chart)),
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
