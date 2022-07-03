@@ -7,13 +7,19 @@ import Output from '../output/Output'
 function Home() {
   return (
     <>
-      <div className="container">
+      <div className="container flex flex-col">
         {/* Loading Navbar component */}
-        <Navbar />
-        <div className="flex flex-col ml-16 p-2 justify-evenly sm:flex-row ">
+        <div className="navbar">
+          <Navbar />
+        </div>
+        <div className="flex flex-row p-2  ">
           {/* Loading Input Component */}
-          <Input  />
-          <Output />
+          <div className="input">
+            <Input />
+          </div>
+          <div className="output">
+            <Output />
+          </div>
         </div>
       </div>
     </>

@@ -120,7 +120,6 @@ const HistoryLineChart = (props) => {
             <Line
                 data={data}
                 options={options}
-                width={900}
                 height={props.height}
             />
 

@@ -73,6 +73,7 @@ const LineChart = (props) => {
                 body: JSON.stringify({ categ: `${usercontext.category.toString()}`,s_date: formatDateForAPI(`${usercontext.startDate.toString()}`).toString(), e_date: formatDateForAPI(`${usercontext.endDate.toString()}`).toString() })
             }).then((response) => {
                 response.json().then((json) => {
+                    console.log(JSON.parse(json)["Priority_Forecast"])
                     setChart(JSON.parse(json)["Priority_Forecast"])
                 })
             }).catch(error => {
@@ -132,7 +133,6 @@ const LineChart = (props) => {
             <Line
                 data={data}
                 options={options}
-                width={900}
                 height={props.height}
             />
 
