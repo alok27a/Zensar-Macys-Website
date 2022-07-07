@@ -4,6 +4,7 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 import { Line } from 'react-chartjs-2'
 import zoomPlugin from 'chartjs-plugin-zoom';
 import graphContext from '../../context/graphs/graphContext';
+import config from "../../config/config.json";
 
 
 ChartJS.register(
@@ -38,7 +39,7 @@ const HistoryLineChart = (props) => {
     }
 
 
-    var baseUrl = "http://localhost:5000/api/previousdata/fetchdata"
+    var baseUrl = config.baseUrlHistoryLineChart
 
     useEffect(() => {
         const fetchData = async () => {
@@ -127,6 +128,7 @@ const HistoryLineChart = (props) => {
                 data={data}
                 options={options}
                 height={props.height}
+                width={props.width}
             />
 
         </>

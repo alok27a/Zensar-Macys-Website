@@ -18,7 +18,7 @@ function Output() {
       <div className="output flex flex-col" data-aos="fade-left">
         <div className='graphs flex flex-row mx-10 ' >
           <div className="graph1 flex flex-col h-fit w-fit mx-10">
-            <LineChart height={255} />
+            <LineChart height={255}  />
             <Link to="/output1">
               <button type="submit" className="bg-[#F4F4F5] hover: active:bg-[#e8f0f8] focus:outline-none focus:ring focus:ring-violet-300 p-3 text-l font-bold rounded-xl w-fit text-[#6984D2]"  >
                 Display In New Page

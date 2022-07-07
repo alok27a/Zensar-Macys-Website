@@ -4,7 +4,7 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 import { Line } from 'react-chartjs-2'
 import zoomPlugin from 'chartjs-plugin-zoom';
 import graphContext from '../../context/graphs/graphContext';
-
+import config from "../../config/config.json";
 
 ChartJS.register(
     Title,
@@ -69,7 +69,7 @@ const LineChart = (props) => {
         return arr;
     }
 
-    var baseUrl = "http://127.0.0.1:8000/arima/"
+    var baseUrl = config.baseUrlLineChart
 
     useEffect(() => {
         const fetchData = async () => {
@@ -151,6 +151,7 @@ const LineChart = (props) => {
                 data={data}
                 options={options}
                 height={props.height}
+                width={props.width}
             />
 
         </>

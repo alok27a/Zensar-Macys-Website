@@ -1,0 +1,4 @@
+{
+    "baseUrlHistoryLineChart":"http://localhost:5000/api/previousdata/fetchdata",
+    "baseUrlLineChart":"http://127.0.0.1:8000/arima/"
+}

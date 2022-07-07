@@ -22,10 +22,10 @@ function App() {
                 <Home />
               </Route>
               <Route exact path="/output1">
-                < LineChart height={400} />
+                < LineChart height={400} width={925}/>
               </Route>
               <Route exact path="/output2">
-                < HistoryLineChart height={400} />
+                < HistoryLineChart height={400} width={925}/>
               </Route>
             </Switch>
           </UserState>
