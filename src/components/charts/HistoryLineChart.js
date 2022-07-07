@@ -22,7 +22,7 @@ const HistoryLineChart = (props) => {
     const { usercontext } = context
 
     const context2 = useContext(graphContext)
-    const { graphcontext2, setGraphContext2 } = context2
+    const { setGraphContext2 } = context2
 
     const [chart, setChart] = useState([])
     const [dates, setDates] = useState([])

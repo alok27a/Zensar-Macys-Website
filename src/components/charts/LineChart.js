@@ -22,7 +22,7 @@ const LineChart = (props) => {
     const { usercontext } = context
 
     const context2 = useContext(graphContext)
-    const { graphcontext1, setGraphContext1 } = context2
+    const { setGraphContext1 } = context2
 
     const [chart, setChart] = useState([])
 
