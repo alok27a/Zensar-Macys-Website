@@ -3,9 +3,9 @@
     background-image: url(/src/images/home-bg.svg);
     background-size: 1100px;
     min-width: 100%;
-    min-height: 100vh;
-    position: fixed;
-    max-height: 100vh;
+    /* min-height: 100vh; */
+    /* position: fixed; */
+    /* max-height: 100vh; */
     background-color: white;
     animation: bg 30s linear infinite;
 }

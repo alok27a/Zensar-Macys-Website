@@ -12,7 +12,7 @@ function Home() {
         <div className="navbar">
           <Navbar />
         </div>
-        <div className="flex flex-row p-2  ">
+        <div className="flex flex-col p-2 sm:flex-row">
           {/* Loading Input Component */}
           <div className="input">
             <Input />

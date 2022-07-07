@@ -16,8 +16,8 @@ function Output() {
   return (
     <>
       <div className="output flex flex-col" data-aos="fade-left">
-        <div className='graphs flex flex-row mx-10 ' >
-          <div className="graph1 flex flex-col h-fit w-fit mx-10">
+        <div className='graphs flex flex-col mx-auto sm:flex-row sm:mx-10' >
+          <div className="graph1 flex flex-col h-fit w-fit mx-0 sm:mx-10">
             <LineChart height={255}  />
             <Link to="/output1">
               <button type="submit" className="bg-[#F4F4F5] hover: active:bg-[#e8f0f8] focus:outline-none focus:ring focus:ring-violet-300 p-3 text-l font-bold rounded-xl w-fit text-[#6984D2]"  >
@@ -25,7 +25,7 @@ function Output() {
               </button>
             </Link>
           </div>
-          <div className="graph2 flex flex-col h-fit w-fit mx-10">
+          <div className="graph2 flex flex-col h-fit w-fit mx-0 sm:mx-10">
             <HistoryLineChart height={255} />
             <Link to="/output2">
               <button type="submit" className="bg-[#F4F4F5] hover: active:bg-[#e8f0f8] focus:outline-none focus:ring focus:ring-violet-300 p-3 text-l font-bold rounded-xl w-fit text-[#6984D2]"  >
@@ -36,7 +36,7 @@ function Output() {
 
         </div>
 
-        <div className="bar-graph h-fit w-fit mx-20">
+        <div className="bar-graph h-fit w-fit mx-auto sm:mx-20">
           <BarChart height={255} />
         </div>
       </div>
