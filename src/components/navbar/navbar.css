@@ -1,4 +1,5 @@
 .navigbar{
     background-color: white;
     min-width: 100vw;
+    z-index: 0;
 }
