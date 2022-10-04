@@ -25,6 +25,8 @@ This is a web app that serves as a landing page for forecasting details of a com
 * JavaScript
 
 <!-- SCREENSHOTS -->
+![image](https://user-images.githubusercontent.com/73957024/193900945-e36a86b8-51e6-47da-b8eb-48a1b5327016.png)
+
 
 ## <img src="https://cdn-icons-png.flaticon.com/512/6823/6823853.png" width="32" height="32">  Screenshots
 
