@@ -1,4 +1,0 @@
-{
-    "port": "5000",
-    "mongoURI": "mongodb+srv://alok27a:Alokm2703@cluster0.fbcgz.mongodb.net/zensar?retryWrites=true&w=majority"
-}
